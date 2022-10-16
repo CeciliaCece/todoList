@@ -1,0 +1,7 @@
+@import "./_custom.scss";
+h1{
+    color:$body-color;
+}
+main{
+    filter: blur(10px);
+}
