@@ -1,4 +1,4 @@
-import b from './test';
+import b from './js/test';
 import "../scss/style.scss";
 import axios from "axios";
 import 'bootstrap';
