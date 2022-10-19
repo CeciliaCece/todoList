@@ -1,0 +1,18 @@
+@each $color, $value in $theme-colors {
+  .link-#{$color} {
+    color: $value !important; // stylelint-disable-line declaration-no-important
+
+    @if $value==$info {
+      &:hover,
+      &:focus {
+        color: $secondary !important; // stylelint-disable-line declaration-no-important
+      }
+    }
+    @if $value==$secondary {
+      &:hover,
+      &:focus {
+          color: $info !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+  }
+}
