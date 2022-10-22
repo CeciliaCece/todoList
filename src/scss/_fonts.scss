@@ -18,10 +18,22 @@
 //---------------------------------------------
 
 @include googleFont((
-  "name": "Baloo Thambi 2",
-  "folder": "Baloo_Thambi_2",
-  "files": "BalooThambi2",
-  "weights": (700)
+        "name": "Baloo Thambi 2",
+        "folder": "Baloo_Thambi_2",
+        "files": "BalooThambi2",
+        "weights": (700)
+  /*( 
+    "name": "Noto Sans TC",
+    "folder": "Noto_Sans_TC",
+    "files": "NotoSansTC",
+    "weights": (400, 500, 700)
+  ),
+  (
+    "name": "Baloo Thambi 2",
+    "folder": "Baloo_Thambi_2",
+    "files": "BalooThambi2",
+     "weights": (700)
+  ),*/
 ));
 
 /*
