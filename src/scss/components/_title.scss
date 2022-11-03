@@ -1,0 +1,57 @@
+@import "~bootstrap/scss/mixins";
+
+ $logo-pic-size-base: 2.03rem;
+
+ $logo-pic-height: 1;
+ $logo-pic-width:  1.05;
+ $logo1-pic-height: 1;
+ $logo1-pic-width: 1;
+ $logo2-pic-height:  0.755;
+ $logo2-pic-width:  0.84;
+
+$t0-logo-size:  1;
+$t1-logo-size:  .836;
+$t2-logo-size:  .5;
+
+@function reSizeLogo($size,$part){
+    @return $logo-pic-size-base * $size * $part;
+}
+.login_page .title {
+     @include media-breakpoint-down(lg) {
+         @include padding-top(3.5rem);
+     }
+ }
+.logo{
+    height : reSizeLogo($t0-logo-size, $logo-pic-height);
+    min-width: reSizeLogo($t0-logo-size, $logo-pic-width);
+}
+.main_page .logo {
+    height: reSizeLogo($t1-logo-size, $logo-pic-height);
+    min-width: reSizeLogo($t1-logo-size, $logo-pic-width);
+}
+.logo1{
+    height: reSizeLogo($t0-logo-size, $logo1-pic-height);
+    min-width: reSizeLogo($t0-logo-size, $logo1-pic-width);
+}
+.main_page .logo1 {
+    height: reSizeLogo($t1-logo-size, $logo1-pic-height);
+    min-width: reSizeLogo($t1-logo-size, $logo1-pic-width);
+}
+.logo2{
+    height: reSizeLogo($t0-logo-size, $logo2-pic-height);
+    min-width: reSizeLogo($t0-logo-size, $logo2-pic-width);
+}
+.main_page .logo2 {
+    height: reSizeLogo($t1-logo-size, $logo2-pic-height);
+    min-width: reSizeLogo($t1-logo-size, $logo2-pic-width);
+}
+h1 {
+     @include font-size(2rem);
+     @include padding-left(.5rem);
+     @include media-breakpoint-down(lg) {
+         @include font-size(3rem);
+     }
+ }
+.main_page h1 {
+    @include font-size(1.5rem);
+}

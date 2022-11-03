@@ -1,0 +1,34 @@
+h1 {
+    font-family: "Baloo Thambi 2";
+}
+
+.login h2 {
+    @include media-breakpoint-up(lg) {
+        @include rfs($h3-font-size);
+    }
+
+    @include media-breakpoint-down(sm) {
+        @include rfs($h4-font-size);
+    }
+}
+
+.image {
+    @include rfs(24rem, height);
+    @include rfs(24rem, width);
+}
+
+.main_page {
+    min-height: 100vh;
+    background-image: linear-gradient(174deg, $secondary 2%, $secondary 53%, #ffffff 53%, #ffffff 100%);
+
+}
+
+.btn:hover {
+    background-color: $gray-600;
+}
+
+.log-out{
+    @include media-breakpoint-down(sm) {
+        @include rfs($h6-font-size);
+    }
+}

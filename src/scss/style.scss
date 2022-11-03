@@ -1,10 +1,14 @@
 @import "bootstrap";
-@import"fonts";
+@import "fonts";
+@import "./components/title.scss";
+@import "./components/btn-edit.scss";
+@import "./components/btn-close.scss";
+@import "./components/list-check.scss";
+@import "./components/plus-button.scss";
+@import "./components/scrollbar.scss";
+@import "./components/card-layout.scss";
+@import "./components/utilities.scss";
+@import "./components/list-layout";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
-h1 {
-   font-family: "Baloo Thambi 2";
-}
-.image {
-   height: 24rem;
-   width: 24rem;
-}
+
+

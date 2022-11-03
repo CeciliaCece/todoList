@@ -1,0 +1,39 @@
+$check-btn-width: 20px !default;
+
+$check-btn-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#FFD370' viewBox='0 0 16 16'><path d='M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z' /></svg>");
+.list{
+    label {
+        cursor: pointer;
+        &:hover {
+            opacity: .75;
+        }
+        input:checked {
+            color: $info;
+            ~span {
+                border-color: $white;
+                background: transparent escape-svg($check-btn-bg) center / $check-btn-width auto no-repeat;
+            }
+            ~p {
+                color: $info;
+                text-decoration: line-through;
+            }
+        }
+    }
+    input {
+        cursor: pointer;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+    span {
+        min-width: $check-btn-width;
+        height: $check-btn-width;
+        border: 1px solid $info;
+        border-radius: 5px;
+    }     
+} 
+
+
+
+
+

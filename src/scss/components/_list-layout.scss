@@ -1,0 +1,30 @@
+.list{
+    li{
+        margin: 0rem 1.5rem;
+        display: flex;
+    }
+    label{
+        width: 100%;
+        padding: 1rem 0;
+        border-bottom: 1px solid $light;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    p{
+        @include font-size(0.875rem);
+        @include padding-left(1.25rem);
+        word-break: break-all;
+    }
+    .list-check{
+        display: flex;
+        align-items: center;
+    }
+
+    .list-btn{
+        display: flex;
+        align-items: center;
+    }
+
+}

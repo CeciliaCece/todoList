@@ -1,0 +1,33 @@
+.card input:focus {
+    border-color: #ffffff;
+}
+
+.card-header {
+    border-bottom: 2px solid $light;
+}
+
+.card .nav-item {
+    width: 33.33%;
+}
+
+.nav-link.active {
+    border-bottom-color: $primary !important;
+}
+
+.card-body {
+    max-height: 56vh;
+    margin-right: .1rem;
+}
+
+.card-footer p,a{
+    @include font-size($h6-font-size)
+}
+
+.card-footer a{
+    color:$info;
+
+    &:hover{
+        color:$primary;
+    }
+}
+
