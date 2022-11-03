@@ -5,10 +5,10 @@
     @if $value==$info {
       &:hover,
       &:focus {
-        color: $secondary !important; // stylelint-disable-line declaration-no-important
+        color: $primary !important; // stylelint-disable-line declaration-no-important
       }
     }
-    @if $value==$secondary {
+    @if $value==$primary {
       &:hover,
       &:focus {
           color: $info !important; // stylelint-disable-line declaration-no-important

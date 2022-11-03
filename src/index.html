@@ -9,49 +9,254 @@
     <title>Online ToDo List</title>
     <!--     未解決
         1.meta標籤https://github.com/joshbuchea/HEAD#meta
-        2.圖片壓縮
         6.https://juejin.cn/post/6895229827747020807
         7.SPA
     -->
 </head>
-<body class="m-auto">
-    <div class="login_page container">
-        <div class="row d-flex justify-content-around">
-            <div class="section col-lg-5 d-flex flex-column justify-content-center align-items-center vh-100 px-0">
-                <div class ="title w-100 d-flex justify-content-center align-items-center">
-                    <div class="logo position-relative m-4">
-                        <div class="position-absolute top-50 start-50 translate-middle pb-2"><img src="./img/logo_fram.svg" alt=""></div>
-                        <div class="position-absolute top-50 start-50 translate-middle ps-2 pb-3"><img src="./img/logo.svg" alt=""></div>   
+<body>
+    <div class="login_page container d-none">
+        <div class="row d-flex justify-content-evenly align-content-start align-content-lg-center min-vh-100">
+
+            <div class="section col-lg-5 d-flex flex-column justify-content-center align-items-center  px-0">
+                <div class ="title d-flex align-items-center justify-content-center">
+                    <div class="logo position-relative">
+                        <img class="logo1 position-absolute bottom-0 start-0" src="./img/logo_fram.svg" alt="Logo">
+                        <img class="logo2 position-absolute top-0 end-0" src="./img/logo.svg" alt="Logo"> 
                     </div>
-                    <div class="xdffcbf"><h1 class="fs-2">ONLINE TODO LIST</h1></div>
+                    <h1>ONLINE TODO LIST</h1>
                 </div>
                 
-                <div class="image mt-2"><img src="./img/main.png" alt=""></div> 
+                <div class="image mt-2 d-none d-lg-block position-relative">
+                    <img class="position-absolute start-50 translate-middle-x" src="./img/main.png" alt="main_pic">
+                </div> 
  
-                    <!--  top-50 start-50 translate-middle -->
             </div>
-            <div class="login col-lg-4 px-0">
-                <div><h2 class="fw-bold fs-4">最實用的線上代辦事項服務</h2></div>
-                <form>
-                    <div class="mb-3">
-                        <label for="Email" class="form-label">Email</label>
-                        <input type="Email" class="form-control" id="Email"   placeholder="請輸入Email">
+            
+            <!-- login/register切換 --> 
+            <div class="login col-10 col-lg-4 px-0 my-6 d-flex flex-column justify-content-center">
+                <h2 class="mb-6 text-center text-lg-start">最實用的線上代辦事項服務</h2>
+                <form class="mb-6 needs-validation" novalidate>
+                    <div class="mb-4">
+                        <label for="loginEmail" class="form-label">Email</label>
+                        <input type="Email" class="form-control" id="loginEmail" placeholder="請輸入Email"
+                            aria-describedby="loginEmail loginEmail_vailid" required>
+                        <div id="loginEmail_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
                     </div>
-                    <!-- aria-describedby="emailHelp" -->
-                    <div class="mb-3">
-                        <label for="Password" class="form-label">密碼</label>
-                        <input type="Password" class="form-control" id="Password" placeholder="請輸入密碼">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg">登入</button>
-                    <a href="#" class="link-primary">註冊帳號</a>
+                    <div class="mb-6">
+                        <label for="loginPassword" class="form-label">密碼</label>
+                        <input type="Password" class="form-control" id="loginPassword" placeholder="請輸入密碼"
+                            aria-describedby="loginPassword loginPassword_vailid" required>
+                        <div id="loginPassword_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
+                    </div> 
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-lg">登入</button>
+                        <!-- bs5 modal 彈出 -->
                     </div>
                 </form>
+                <a href="#" class="accLink link-primary mx-auto" title="註冊帳號"><h5>註冊帳號</h5></a>
+            </div>
+
+
+            <div class="register d-none col-10 col-lg-4 px-0 my-6 d-flex flex-column justify-content-center">
+                <h2 class="mb-6 text-center text-lg-start">註冊帳號</h2>
+                <form class="mb-6 needs-validation" novalidate>
+                    <div class="mb-4">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="Email" class="form-control" id="Email" placeholder="請輸入Email" aria-describedby="Email Email_vailid" required>
+                        <div id="Email_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="Nickname" class="form-label">您的暱稱</label>
+                        <input type="text" class="form-control" id="Nickname" placeholder="請輸入您的暱稱"  aria-describedby="Nickname Nickname_vailid" required>
+                        <div id="Nickname_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="Password" class="form-label">密碼</label>
+                        <input type="Password" class="form-control" id="Password" placeholder="請輸入密碼" aria-describedby="Password Password_vailid" required>
+                        <div id="Password_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="Password2" class="form-label">再次輸入密碼</label>
+                        <input type="Password" class="form-control" id="Password2" placeholder="請再次輸入密碼" aria-describedby="Password2 Password2_vailid" required>
+                        <div id="Password2_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-lg">註冊帳號</button>
+                        <!-- bs5 modal 彈出 -->
+                    </div>
+                </form>
+                <a href="#" class="accLink link-primary mx-auto" title="登入"><h5>登入</h5></a>
             </div>
             
         </div>
-    
     </div>
-    <script src="./js/index.js"></script>
+    <div class="main_page pb-7">
+        <nav class="navbar bg-secondary">
+            <div class="container-fluid px-8 py-4">
+                <div class="title d-flex align-items-center justify-content-center">
+                    <div class="logo position-relative">
+                        <img class="logo1 position-absolute bottom-0 start-0" src="./img/logo_fram.svg" alt="Logo">
+                        <img class="logo2 position-absolute top-0 end-0" src="./img/logo.svg" alt="Logo">
+                    </div>
+                    <h1>ONLINE TODO LIST</h1>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="#" title="待辦事項"><h5 class="px-6 d-none d-sm-block">王小明的待辦</h5></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="accLink" title="登出"><h5 class="fw-normal log-out">登出</h5></a>
+                    </li>
+                </ul>      
+            </div>
+        </nav>
+        <div class="container px-8 mt-6">
+            <div class="row justify-content-center">
+                <div class="card px-1 col-lg-7">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <input type="text" class="form-control w-75" placeholder="新增待辦事項" aria-describedby="plus_button">
+                        <div class="plus-button btn btn-primary d-flex align-items-center justify-content-center" title="新增按鈕">+</div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        <div class="container px-8">
+            <div class="row justify-content-center">
+                <div class="card mt-4 col-lg-7  p-0">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs text-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" title="全部"><h6>全部</h6></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="待完成"><h6>待完成</h6></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" title="已完成"><h6>已完成</h6></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body overflow-auto my-2">
+                        <ul class="list list-group">
+                            <li>
+                                <label for="check-0">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-0">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-1">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-1">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-2">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-2">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-3">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-3">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-4">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-4">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-5">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-5">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-6">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-6">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="check-7">
+                                    <div class="list-check">
+                                        <input type="checkbox" id="check-7">
+                                        <span></span>
+                                        <p>把冰箱發霉的檸檬拿去丟掉</p>
+                                    </div>
+                                    <div class="list-btn">
+                                        <button type="button" class="btn-edit" title="編輯"></button>
+                                        <button type="button" class="btn-close" title="刪除"></button>
+                                    </div>
+                                </label>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-content-center px-6 pb-8 pt-4">
+                        <p>5個待辦完成項目</p>
+                        <a href="#" class="accLink" title="清除已完成項目">清除已完成項目</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+            <img class="d-none" src="./img/empty.png" alt="empty_pic">
+
+    </div>
+    <script type="module" src="./js/index.js"></script>
 </body>
 
 </html>
