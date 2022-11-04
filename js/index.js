@@ -3084,6 +3084,16 @@ function withinMaxClamp(min, value, max) {
 
 /***/ }),
 
+/***/ "./src/js/test.js":
+/*!************************!*\
+  !*** ./src/js/test.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__) {
+
+/* harmony default export */ __webpack_exports__["default"] = (8);
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.esm.js":
 /*!*********************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.esm.js ***!
@@ -8381,9 +8391,10 @@ var __webpack_exports__ = {};
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
-/* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
-//import b from './test';
+/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test */ "./src/js/test.js");
+/* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+
 
 
 //import axios from "axios";
@@ -8394,6 +8405,8 @@ var __webpack_exports__ = {};
 //b++;
 //console.log(process.env.DB_HOST);
 
+_test__WEBPACK_IMPORTED_MODULE_0__["default"]++;
+console.log(_test__WEBPACK_IMPORTED_MODULE_0__["default"]);
 function pageChange(page) {
   const login_page = document.querySelector('.login_page');
   const main_page = document.querySelector('.main_page');
