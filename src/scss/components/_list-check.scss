@@ -5,7 +5,12 @@ $check-btn-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' w
     label {
         cursor: pointer;
         &:hover {
-            opacity: .75;
+            .list-check{
+                opacity: .75;
+            }
+            .list-btn button{
+                opacity: 1;
+            }
         }
         input:checked {
             color: $info;

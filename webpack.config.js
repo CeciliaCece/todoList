@@ -1,49 +1,48 @@
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const {PurgeCSSPlugin} = require('purgecss-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
+const DEV_MODE=process.env.NODE_ENV==='development';
 const glob = require("glob-all");
 
-
-
-
+//PUG可優化不同的HTML檔案
 
 module.exports = {
- 
-  entry: './src/js/index.js',
+
+  mode: process.env.NODE_ENV,
+
+  //未解bug context: path.resolve(__dirname, 'src'),
+  //stats: { children: true },
+
+  entry: {
+    index:'./src/js/index.js',
+    signup: './src/js/signup.js',
+    login: './src/js/login.js',
+  },
  
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'js/index.js',
+    path: path.resolve('dist'),
+    filename: 'js/[name].js',
     clean: true, 
   },
 
-  //production mode no compress
-  mode: 'development',
-    optimization: {
-    usedExports: true,
-  }, 
-
   // Define development options
 
-  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'inline-source-map',
+  devtool:DEV_MODE ? 'inline-source-map' : false,
 
-    
   module: {
     rules: [
+      {
+        test: /\.ejs$/i,
+        use: ['html-loader', 'template-ejs-loader'],
+      },
       // Use babel for JS files
       {
-        test: /\.js$/,
+        test: /\.js|jsx$/,
         exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: [
-              '@babel/preset-env'
-            ]
-          }
         }
       },
 
@@ -51,7 +50,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/,
         use: [
-          process.env.NODE_ENV === 'production' ? miniCssExtractPlugin.loader : "style-loader",
+          miniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
           },
@@ -73,7 +72,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|jpeg|png|webp|gif|svg|ico)$/i,
+        test: /\.(jpg|jpeg|png|webp|gif|svg)$/i,
         type: "asset",
         generator: {
           filename: 'img/[name][ext]',
@@ -93,27 +92,12 @@ module.exports = {
         }
       },
       {
-        test: /.*font.*\.svg$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'fonts/[name][ext]',
-        }
-      },
-      {
         test: /\.html$/i,
-        loader: "html-loader",
-        options: {
-          sources: {
-            list: [
-              "...",
-              {
-              tag: "script",
-              attribute: "src",
-              type: "src",
-              filter:()=>false,
-            }, ]
-          }, 
-        }
+        use:[
+          {
+            loader: "html-loader",
+          }
+        ],
       },
     ],
   },
@@ -122,73 +106,51 @@ module.exports = {
   plugins: [
     new Dotenv(),
     new miniCssExtractPlugin({
-      filename: 'css/main.css',
+      filename: `css/style.css`,
     }),
     new PurgeCSSPlugin({
-      paths: glob.sync([`${path.resolve(__dirname, "src")}/**/*`, `${path.resolve(__dirname, "src")}.html`,] ,{ nodir: true }),
-      safelist() {
-        return {
-          standard: [],
-          deep: [],
-          greedy: [],
-        };
-      }
+      paths: glob.sync([`${path.join('src')}/**/*`] ,{ nodir: true }),
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
-      minify: {
-        /*collapseBooleanAttributes: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        minifyCSS: true,
-        minifyJS: true,
-        sortAttributes: true,
-        useShortDoctype: true,*/
-      },
+      template: './src/ejs/index.ejs',
+      filename: 'html/index.html',
+      chunks: ['vendor', 'index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/ejs/login.ejs',
+      filename: 'html/login.html',
+      chunks: ['vendor', 'login'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/ejs/signup.ejs',
+      filename: 'html/signup.html',
+      chunks: ['vendor', 'signup'],
     }),
   ],
 
   optimization: {
-    //production mode no compress
-    minimize: true,
-    minimizer: [
-      /*new TerserPlugin({
-        test: /\.js(\?.*)?$/i, 
-        extractComments: false,
-        terserOptions: {
-          compress:false,
-          toplevel: true,
-          ie8: true,
-          safari10: true,
-          format: {
-            comments: false,
-          },
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'initial',
+          priority:10,
+          enforce: true,
         },
-      })*/
-    ],
-    usedExports: true,  
+      },
+    },
   },
 
   // Configure the "webpack-dev-server" plugin
   devServer: {
-    hot: true,
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.resolve('./dist/html')
     },
+    historyApiFallback:true,
+    hot: true,
     compress: true,
     open: true,
     port: 9000,
   },
-  
-  // Performance configuration
-  /* performance: {
-    hints: false
-  } */
-  
 };
