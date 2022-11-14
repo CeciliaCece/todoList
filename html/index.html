@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>Online ToDo List</title>
+<script defer src="../js/vendor.js"></script><script defer src="../js/index.js"></script><link href="../css/style.css" rel="stylesheet"></head>
+
+<body>
+
+<div class="main-page pb-7 mx-auto text-center">
+  <nav class="navbar bg-secondary">
+    <div class="container-fluid px-8 py-4">
+      <div class="title d-flex align-items-center justify-content-center">
+        <div class="logo position-relative">
+          <img
+            class="logo1 position-absolute bottom-0 start-0"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzOCIgaGVpZ2h0PSIzOCIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTM1LjQ3MzEgMTguMzQ3NWMtLjEwMjctLjAzMjEtLjIwMTUtLjA0MDMtLjI5NzItLjAyNDQtLjIwNi4wMzQtLjM3NDMuMTQzMS0uNTA2Mi4zMjc3bC0xLjI2NzggMS43Njk4Yy0uMTE4NC4xNjYxLS4xNjA5LjM1MTctLjEyNjkuNTU3NWwuOTk2OCA2LjAyNzNjLjE3MjggMS4wNDQ0LS4wNTA0IDEuOTk5Mi0uNjcxNSAyLjg2NjEtLjYyMDUuODY2NS0xLjQ1MzEgMS4zODYyLTIuNDk3MyAxLjU1ODlsLTE5Ljc0NDMgMy4yNjU0Yy0xLjA0NDMuMTcyOC0xLjk5OTc5LS4wNTEyLTIuODY2MjYtLjY3MTctLjg2NjY5LS42MjA5LTEuMzg2MDgtMS40NTI5LTEuNTU4ODItMi40OTczbC0zLjI2NTQtMTkuNzQzOWMtLjE3MjY4LTEuMDQ0Mi4wNTExMS0xLjk5OTQ4LjY3MTc3LTIuODY2MjMuNjIwNTItLjg2NjU1IDEuNDUzLTEuMzg2MSAyLjQ5NzMxLTEuNTU4ODJsMTkuNzQ0NS0zLjI2NTVjLjM0ODEtLjA1NzU3LjcxMTktLjA2ODk3IDEuMDkxNC0uMDM0MTQuMTAwMi4wMTU3MS4xNzQuMDE5OTguMjIwOS4wMTIyMy4yMDYtLjAzNDA3LjM3NDktLjE0MzA1LjUwNjktLjMyNzM3bC45NzA1LTEuMzU1MTZjLjE1ODMtLjIyMDk3LjE5MTgtLjQ2MjM2LjA5OTUtLjcyMzE3LS4wODkzLS4yNDUzMy0uMjYyLS40MDM3OS0uNTE3Ni0uNDc1MTctLjkxOTEtLjI1Mzc3LTEuODc3OS0uMjk5MDQtMi44NzQ2LS4xMzQyTDYuMzM1IDQuMzIwNzZjLTEuODgyNjUuMzExMzYtMy4zODE5NiAxLjI0NjA2LTQuNDk3NzQgMi44MDQwNUMuNzIxNjYgOC42ODI5NS4zMTk0MyAxMC40MDMxLjYzMDgxIDEyLjI4NThsMy4yNjU0NyAxOS43NDQ0Yy4zMTEzMyAxLjg4MjQgMS4yNDYwMSAzLjM4MTYgMi44MDM5MiA0LjQ5NzQgMS41NTgwNiAxLjExNjIgMy4yNzg0NyAxLjUxODMgNS4xNjExIDEuMjA3bDE5Ljc0NDMtMy4yNjU1YzEuODgyNC0uMzExMyAzLjM4MTktMS4yNDYgNC40OTc2LTIuODA0NCAxLjExNTktMS41NTggMS41MTg3LTMuMjc4MyAxLjIwNzMtNS4xNjA4bC0xLjI0ODItNy41NDdjLS4wNTUtLjMzMTktLjI1MTktLjUzNDktLjU4OTItLjYwOTRaIi8+PC9zdmc+"
+            alt="Logo"
+          />
+          <img
+            class="logo2 position-absolute top-0 end-0"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIyOSIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMzEuMTc3MiAyLjc0MDY1IDI4LjEzNDcuNTYxNzNjLS40NDI1LS4zMTY4LS45MjUtLjQzMjAzLTEuNDQ3My0uMzQ1NjYtLjUyMTUuMDg2MjYtLjk0MTYuMzUwNzgtMS4yNTgyLjc5MzEyTDEyLjYxNDMgMTguOTAyOGwtNy4yNzMyMi01LjIwOTJjLS40NDI2LS4zMTctLjkyNDk2LS40MzItMS40NDY4Ny0uMzQ1Ny0uNTIxOTkuMDg2My0uOTQxNDcuMzUwNS0xLjI1ODUuNzkzMkwuNDU3MDYgMTcuMTgzMmMtLjMxNjg5LjQ0MjQtLjQzMjMuOTI0OS0uMzQ1OTQgMS40NDcxLjA4NjMzLjUyMi4zNTA5Ljk0MTQuNzkzNDIgMS4yNTg1bDExLjg5MTk2IDguNTE2NmMuNDQyNi4zMTcxLjkyNS40MzIxIDEuNDQ2OS4zNDU3LjUyMTktLjA4NjMuOTQxNS0uMzUwMyAxLjI1ODUtLjc5MzFMMzEuNjI0NCA1LjQ0NTk3Yy4zMTY2LS40NDIzNi40MzIzLS45MjQ5Mi4zNDU5LTEuNDQ2OS0uMDg2My0uNTIxOTktLjM1MDYtLjk0MTYxLS43OTMxLTEuMjU4NDJaIi8+PC9zdmc+"
+            alt="Logo"
+          />
+        </div>
+        <h1>ONLINE TODO LIST</h1>
+      </div>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="#" title="待辦事項">
+            <h5 class="whose-acc px-6 d-none d-sm-block"></h5>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="log-out" title="登出">
+            <h5 class="fw-normal log-out">登出</h5>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container px-8 mt-6">
+  <div class="row justify-content-center">
+    <div class="card px-1 col-lg-7">
+      <div class="d-flex align-items-center justify-content-between">
+        <input
+          type="text"
+          class="add-todo form-control w-100"
+          maxlength="64"
+          placeholder="新增待辦事項"
+          aria-describedby="plus_button"
+        />
+        <div
+          class="plus-button btn btn-primary d-flex align-items-center justify-content-center"
+          title="新增按鈕"
+        >
+          +
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="allCard container px-8">
+  <div class="row justify-content-center">
+    <div class="card mt-4 col-lg-7 p-0">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs text-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="#" title="全部">
+              <h6>全部</h6>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" title="待完成">
+              <h6>待完成</h6>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" title="已完成">
+              <h6>已完成</h6>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body overflow-auto my-2">
+        <ul class="list list-group">
+          <!-- list -->
+        </ul>
+      </div>
+      <div
+        class="card-footer d-flex justify-content-between align-content-center px-6 pb-8 pt-4"
+      >
+        <p class="count"><!-- count --></p>
+        <a href="#" class="clearDone" title="清除已完成項目">清除已完成項目</a>
+      </div>
+    </div>
+  </div>
+</div>
+<img class="empty d-none mt-10" src="../img/empty.png" alt="empty_pic" />
+<p class="fixed-bottom pb-2">版權所有</p>
+
+</div>
+
+
+</body>
+
+</html>
