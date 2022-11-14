@@ -16,7 +16,7 @@ $t2-logo-size:  .5;
 @function reSizeLogo($size,$part){
     @return $logo-pic-size-base * $size * $part;
 }
-.login_page .title {
+.sign-page .title {
      @include media-breakpoint-down(lg) {
          @include padding-top(3.5rem);
      }
@@ -25,7 +25,7 @@ $t2-logo-size:  .5;
     height : reSizeLogo($t0-logo-size, $logo-pic-height);
     min-width: reSizeLogo($t0-logo-size, $logo-pic-width);
 }
-.main_page .logo {
+.main-page .logo {
     height: reSizeLogo($t1-logo-size, $logo-pic-height);
     min-width: reSizeLogo($t1-logo-size, $logo-pic-width);
 }
@@ -33,7 +33,7 @@ $t2-logo-size:  .5;
     height: reSizeLogo($t0-logo-size, $logo1-pic-height);
     min-width: reSizeLogo($t0-logo-size, $logo1-pic-width);
 }
-.main_page .logo1 {
+.main-page .logo1 {
     height: reSizeLogo($t1-logo-size, $logo1-pic-height);
     min-width: reSizeLogo($t1-logo-size, $logo1-pic-width);
 }
@@ -41,7 +41,7 @@ $t2-logo-size:  .5;
     height: reSizeLogo($t0-logo-size, $logo2-pic-height);
     min-width: reSizeLogo($t0-logo-size, $logo2-pic-width);
 }
-.main_page .logo2 {
+.main-page .logo2 {
     height: reSizeLogo($t1-logo-size, $logo2-pic-height);
     min-width: reSizeLogo($t1-logo-size, $logo2-pic-width);
 }
@@ -52,6 +52,6 @@ h1 {
          @include font-size(3rem);
      }
  }
-.main_page h1 {
+.main-page h1 {
     @include font-size(1.5rem);
 }
