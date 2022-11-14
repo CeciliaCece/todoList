@@ -4,10 +4,11 @@ import axios from "axios";
 
 'use strict'
 
-function logIn(email, password) {
-    axios.post(`https://todoo.5xcamp.us/users/sign_in`, {
+function register(email, nickname, password) {
+    axios.post(`https://todoo.5xcamp.us/users`, {
         "user": {
             "email": email,
+            "nickname": nickname,
             "password": password
         }
     })
@@ -18,15 +19,12 @@ function logIn(email, password) {
             localStorage.setItem('token', token);
             location.replace("./index.html");
         })
-        .catch(error => {
-            emailCheck(null, variables.Email);
-            passwordCheck(null, variables.Password);
-        })
+        .catch(error => emailCheck(null, variables.Email))
 }
 
 function apiParameter() {
     const inputs = document.querySelectorAll('input');
-    logIn(inputs[variables.Email].value, inputs[variables.Password].value)
+    register(inputs[variables.Email].value, inputs[variables.Nickname].value, inputs[variables.Password].value)
 }
 
 function emailCheck(input, num) {
@@ -38,12 +36,26 @@ function emailCheck(input, num) {
         state.setCustomValidity("X")
     }
     else if (input == null) {
-        feedbacks[num].textContent = `Email或密碼錯誤`;
+        feedbacks[num].textContent = `此Email已註冊`;
         state.setCustomValidity("X")
         clearState = true;
     }
     else if (emailRegExp.exec(input) == null) {
         feedbacks[num].textContent = `請填寫正確Email格式`;
+        state.setCustomValidity("X")
+    }
+    else {
+        state.setCustomValidity("")
+    }
+}
+
+function nameCheck(input, num) {
+    const feedbacks = document.querySelectorAll('.feedback');
+    let state = document.getElementById('Nickname')
+    input = input.replace('　', ' ')
+    input = input.trim();
+    if (input == "") {
+        feedbacks[num].textContent = `此欄位不可為空`;
         state.setCustomValidity("X")
     }
     else {
@@ -60,17 +72,37 @@ function passwordCheck(input, num) {
         feedbacks[num].textContent = `此欄位不可為空`;
         state.setCustomValidity("X")
     }
-    else if (input == null) {
-        feedbacks[num].textContent = `Email或密碼錯誤`;
-        state.setCustomValidity("X")
-        clearState = true;
-    }
     else if (passwordRegExp.exec(input) == null) {
         feedbacks[num].textContent = `請輸入八至二十位數字及英文`;
         state.setCustomValidity("X")
     }
     else {
         state.setCustomValidity("")
+    }
+}
+
+function password2Check(input1, input2, num) {
+    const feedbacks = document.querySelectorAll('.feedback')
+    let state = document.getElementById('Password2')
+
+    if (input1 == "") {
+        if (input2 == "") {
+            feedbacks[num].textContent = `此欄位不可為空`;
+            state.setCustomValidity("X");
+        }
+        else {
+            feedbacks[num].textContent = `需與密碼相同`;
+            state.setCustomValidity("X");
+        }
+    }
+    else {
+        if (input1 !== input2) {
+            feedbacks[num].textContent = `需與密碼相同`;
+            state.setCustomValidity("X");
+        }
+        else {
+            state.setCustomValidity("");
+        }
     }
 }
 
@@ -87,24 +119,31 @@ const inputs = document.querySelectorAll('input');
 Array.from(inputs).forEach(input => {
     const Num = input.getAttribute("data-num");
     const Type = input.getAttribute("id");
-    variables[Type] =  Num;
+    variables[Type] = Num;
 })
 
 //input後檢查
+let tempPwd = "";
 Array.from(inputs).forEach((input, num) => {
     input.addEventListener('input', (e) => {
         if (num == variables.Email) {
             emailCheck(inputs[variables.Email].value, num);
         }
+        if (num == variables.Nickname) {
+            nameCheck(inputs[variables.Nickname].value, num);
+        }
         if (num == variables.Password) {
             passwordCheck(inputs[variables.Password].value, num);
+            tempPwd = inputs[variables.Password].value;
         }
-        if (clearState){
+        if (num == variables.Password2) {
+            password2Check(tempPwd, inputs[variables.Password2].value, num);
+        }
+        if (clearState) {
             const form = document.querySelector('form')
             form.classList.remove('was-validated');
             clearState = false;
             emailCheck(inputs[variables.Email].value, num);
-            passwordCheck(inputs[variables.Password].value, num);
         }
     })
 })
@@ -118,7 +157,5 @@ form.addEventListener('submit', e => {
     if (form.checkValidity()) {
         apiParameter();
     }
-    form.classList.add('was-validated')
+    form.classList.add('was-validated');
 }, false)
-
-

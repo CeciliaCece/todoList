@@ -1,24 +1,24 @@
-<div class="login col-10 col-lg-4 px-0 my-6 d-flex flex-column justify-content-center">
+<div class="col-10 col-lg-4 px-0 my-6 d-flex flex-column justify-content-center">
     <h2 class="mb-6 text-center text-lg-start">最實用的線上代辦事項服務</h2>
-    <form action="./index.html" class="mb-6 needs-validation" novalidate>
+    <form class="mb-6 needs-validation" novalidate>
         <div class="mb-4">
             <label for="Email" class="form-label">Email</label>
-            <input type="Email" class="form-control" id="Email" placeholder="請輸入Email"
+            <input type="Email" class="form-control" id="Email" data-num="0" maxlength="64" placeholder="請輸入Email"
                 aria-describedby="Email Email_vailid" required>
             <div id="Email_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
         </div>
         <div class="mb-6">
             <label for="Password" class="form-label">密碼</label>
-            <input type="Password" class="form-control" id="Password" placeholder="請輸入密碼"
+            <input type="Password" class="form-control" id="Password" data-num="1" maxlength="20" placeholder="請輸入密碼"
                 aria-describedby="Password Password_vailid" required>
             <div id="Password_vailid" class="feedback invalid-feedback fw-bold">此欄位不可為空</div>
         </div>
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary btn-lg">登入</button>
-            <!-- bs5 modal 彈出 -->
         </div>
     </form>
-    <a href="./signup.html" class="accLink link-primary mx-auto" title="註冊帳號">
+    <a href="./register.html" class="link-primary mx-auto" title="註冊帳號">
         <h5>註冊帳號</h5>
     </a>
+
 </div>
