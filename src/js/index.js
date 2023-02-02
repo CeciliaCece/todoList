@@ -3,6 +3,7 @@ import * as bootstrap from "bootstrap";
 import Swal from "sweetalert2";
 import axios from "axios";
 import cookie from "./cookie.js";
+let i = 0;
 
 ("use strict");
 
@@ -10,7 +11,6 @@ const apiUrl = "https://todoo.5xcamp.us/";
 let token = localStorage.getItem("token");
 let Token = JSON.parse(token);
 let Sort = 0;
-let todos;
 
 const swalCustomStyle = Swal.mixin({
   customClass: {
@@ -44,37 +44,34 @@ logout();
 logout();
 addTodo();
 changeSort();
-clearDone();
-
-function render() {
-  todos = getTodo();
-  setTimeout(() => {
-    //console.log(todos);
-    renderList(todos);
-    editTodo();
-    delTodo();
-    todoStateChange();
-  }, 100);
+async function render() {
+  const todos = await axios.get(`${apiUrl}todos`);
+  renderList(todos.data.todos);
+  clearDone(todos.data.todos);
 }
-
 render();
 
 function renderList(todos) {
+  /* const editBtns = document.querySelectorAll(".editBtn");
+  Array.from(editBtns).forEach((editBtn) => {
+    editBtn.removeEventListener("change", (e) => {
+      console.log("111");
+    });
+  }); */
   document.querySelector(".empty").classList.add("d-none");
   document.querySelector(".allCard").classList.remove("d-none");
-  let content = [];
   let list = "";
   let undo = 0;
   let done = 0;
 
   Array.from(todos).forEach((todo, index) => {
+    todo.completed_at === null ? undo++ : done++;
     if (Sort == 1 && todo.completed_at != null) {
       return;
     }
     if (Sort == 2 && todo.completed_at == null) {
       return;
     }
-    content.unshift(todo.content);
     list = `<li id="${todo.id}">
           <label for="check-${index}" class="checkLabel">
           <input type="checkbox" id="check-${index}" ${
@@ -88,7 +85,6 @@ function renderList(todos) {
           <button type="button" class="delBtn btn-close" title="刪除"></button>
           </div>
           </li >${list}`;
-    todo.completed_at === null ? undo++ : done++;
   });
 
   if (undo + done == 0) {
@@ -97,34 +93,10 @@ function renderList(todos) {
   }
   document.querySelector(".list").innerHTML = list;
   document.querySelector(".count").innerHTML = `${undo}個待完成項目`;
-}
-function logout() {
-  const logout = document.querySelector(".log-out");
-  logout.addEventListener("click", (e) => {
-    axios
-      .delete(`${apiUrl}users/sign_out`)
-      .then((res) => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("sort");
-        location.replace("./login.html");
-      })
-      .catch((err) => console.log(err));
-  });
-}
-function getTodo() {
-  axios
-    .get(`${apiUrl}todos`)
-    .then((res) => {
-      todos = res.data.todos;
-      // console.log(todos);
-    })
-    .catch((error) => {
-      console.log(error.response);
-      console.log(
-        "Oops... There was a problem connecting to the server. Please try again later."
-      );
-    });
-  return todos;
+
+  editTodo();
+  delTodo();
+  todoStateChange();
 }
 function addTodo() {
   const addTodo = document.querySelector(".plus-button");
@@ -147,6 +119,8 @@ function editTodo() {
   let list = document.querySelectorAll(".list p");
   Array.from(editBtns).forEach((editBtn, index) => {
     editBtn.addEventListener("click", (e) => {
+      i++;
+      console.log(i);
       Swal.fire({
         title: "請編輯文字內容",
         input: "text",
@@ -210,19 +184,34 @@ function changeSort() {
     });
   });
 }
-function clearDone() {
-  const clearAll = document.querySelector(".clearDone");
-  clearAll.addEventListener("click", (e) => {
-    const lists = document.querySelectorAll(".list li");
-    Array.from(lists).forEach((li, index) => {
-      axios
-        .delete(`${apiUrl}/todos/${li.id}`)
-        .then((res) => {
-          if (index == lists.length - 1) {
-            render();
-          }
-        })
-        .catch((err) => console.log(err));
+
+function clearDone(todos) {
+  const clearDone = document.querySelector(".clearDone");
+  clearDone.addEventListener("click", (e) => {
+    Array.from(todos).forEach((todo, index) => {
+      if (todo.completed_at != null) {
+        axios
+          .delete(`${apiUrl}/todos/${todo.id}`)
+          .then((res) => {})
+          .catch((err) => console.log(err));
+      }
     });
+    setTimeout(() => {
+      render();
+    }, 1000);
+  });
+}
+
+function logout() {
+  const logout = document.querySelector(".log-out");
+  logout.addEventListener("click", (e) => {
+    axios
+      .delete(`${apiUrl}users/sign_out`)
+      .then((res) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("sort");
+        location.replace("./login.html");
+      })
+      .catch((err) => console.log(err));
   });
 }
